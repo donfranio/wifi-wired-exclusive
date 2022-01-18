@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# From https://www.matoski.com/article/wifi-ethernet-autoswitch/
 
 name_tag="wifi-wired-exclusive"
 syslog_tag="$name_tag"
