@@ -11,8 +11,8 @@ fi
 
 interface="$1"
 iface_mode="$2"
-iface_type=$(nmcli dev | grep "^$interface$" | tr -s ' ' | cut -d' ' -f2)
-iface_state=$(nmcli dev | grep "^$interface$" | tr -s ' ' | cut -d' ' -f3)
+iface_type=$(nmcli dev | grep "^$interface" | tr -s ' ' | cut -d' ' -f2)
+iface_state=$(nmcli dev | grep "^$interface" | tr -s ' ' | cut -d' ' -f3)
 
 # Check, if an ethernet is left
 # This is needed if the ethernet-interface is getting unplugged
@@ -21,7 +21,7 @@ connected_ethernets_left=$(nmcli dev | grep "\sethernet\s" | tr -s ' ' | cut -d'
 # Check, if we try to switch off wifi
 # If we are on wifi and want to switch it off, we should not consider, if
 # no ethernet is left, because then we just switch it on again.
-if [ "$iface_type" = "wifi" ] && [ $connected_ethernet_left != 0 ]; then
+if [ "$iface_type" = "wifi" ] && [ ! $connected_ethernet_left = 0 ]; then
   switch_without_ethernet = 1
 fi
 
